@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { jwtSecretKey } = require("../../../../data");
+const { jwtSecretKey } = require("../../../data");
 const UserController = require("./userController");
 const { userSchema, authSchema } = require("../validations");
 

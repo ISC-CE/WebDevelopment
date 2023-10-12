@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { jwtSecretKey } = require("../../../../data");
+const { jwtSecretKey } = require("../../../data");
 const AuthController = require("../controllers/authController");
 
 router.post("/register", function (req, res, next) {

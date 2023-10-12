@@ -1,4 +1,4 @@
-const { usersDB } = require("../../../../data");
+const { usersDB } = require("../../../data");
 const { userSchema } = require("../validations");
 
 class UserController {

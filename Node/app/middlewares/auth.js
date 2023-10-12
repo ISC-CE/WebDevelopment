@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { jwtSecretKey } = require("../../../../data");
+const { jwtSecretKey } = require("../../../data");
 
 const authenticateToken = (req, res, next) => {
   const bearerToken = req.header("Authorization");
