@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: BootCamp
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Health
+  - name: Auth
+  - name: User Management
+paths:
+  /:
+    get:
+      tags:
+        - Health
+      summary: Health check
+      description: The is the entry point for the app health check
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: user2
+                password: password2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: donkovah
+                email: iamkesington@gmail.com
+                password: password2
+                age: 31
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users:
+    get:
+      tags:
+        - User Management
+      summary: Get Users
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/652924a119d505f5a6077d4e:
+    get:
+      tags:
+        - User Management
+      summary: Get User
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /users/65292b6ede4d9e438f3e5082:
+    patch:
+      tags:
+        - User Management
+      summary: Update User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: user1
+                email: iamkess@gmail.com
+                password: password3
+                age: 36
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - User Management
+      summary: Delete User
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
