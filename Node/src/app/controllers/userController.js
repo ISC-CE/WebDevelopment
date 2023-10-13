@@ -1,4 +1,3 @@
-const { usersDB } = require("../../../data");
 const { userModel } = require("../../infra/db/models/userModel");
 const { userSchema } = require("../validations");
 
