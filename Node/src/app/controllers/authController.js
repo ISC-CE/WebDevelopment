@@ -1,6 +1,4 @@
 const jwt = require("jsonwebtoken");
-
-const { jwtSecretKey } = require("../../../data");
 const UserController = require("./userController");
 const { userSchema, authSchema } = require("../validations");
 
@@ -11,7 +9,7 @@ class AuthController {
     this.userController = new UserController();
   }
 
-  login(user) {
+  async login(user) {
     // Validate user data
     const { error } = authSchema.validate(user);
 
@@ -21,7 +19,7 @@ class AuthController {
 
     const { username, password } = user;
 
-    const existingUser = this.userController.getByUserName(username);
+    const existingUser = await this.userController.getByUserName(username);
     if (!existingUser) {
       throw new Error("User not found");
     }
@@ -32,23 +30,23 @@ class AuthController {
 
     const token = jwt.sign(
       { username, email: existingUser.email, age: existingUser.age },
-      jwtSecretKey,
+      process.env.JWT_SECRET_KEY,
       {
-        expiresIn: "1h",
+        expiresIn: "5h",
       }
     );
 
     return token;
   }
 
-  register(user) {
+  async register(user) {
     // Validate user data
     const { error } = userSchema.validate(user);
 
     if (error) {
       throw new Error(error);
     }
-    return this.userController.storeUser(user);
+    return await this.userController.storeUser(user);
   }
 }
 

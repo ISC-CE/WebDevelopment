@@ -1,15 +1,18 @@
+require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const authenticateToken = require("./app/middlewares/auth");
+const authenticateToken = require("./src/app/middlewares/auth");
 
-const indexRouter = require("./app/routes/index");
-const usersRouter = require("./app/routes/users");
-const authRouter = require("./app/routes/auth");
+const indexRouter = require("./src/app/routes/index");
+const usersRouter = require("./src/app/routes/users");
+const authRouter = require("./src/app/routes/auth");
 
 const app = express();
+
+require("./src/infra/db/connection");
 
 app.use(logger("dev"));
 app.use(express.json());
