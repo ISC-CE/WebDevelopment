@@ -3,12 +3,14 @@ const createError = require("http-errors");
 const express = require("express");
 const logger = require("morgan");
 const authenticateToken = require("./src/app/middlewares/auth");
+const cors = require("cors");
 
 const indexRouter = require("./src/app/routes/index");
 const usersRouter = require("./src/app/routes/users");
 const authRouter = require("./src/app/routes/auth");
 
 const app = express();
+app.use(cors());
 
 require("./src/infra/db/connection");
 
