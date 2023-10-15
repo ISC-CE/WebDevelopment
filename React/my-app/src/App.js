@@ -11,13 +11,13 @@ function App() {
       path: "/",
       element: <AuthGuard />,
       children: [
-        { path: "login", element: <AuthPage /> },
         { path: "home", element: <UserList /> },
-        { path: "register", element: <RegisterPage /> },
         { path: "/", element: <Navigate to="home" /> },
         { path: "/*", element: <Navigate to="home" />, caseSensitive: false }, // Catch-all route for other paths
       ],
     },
+    { path: "login", element: <AuthPage /> },
+    { path: "register", element: <RegisterPage /> },
   ]);
 
   return (

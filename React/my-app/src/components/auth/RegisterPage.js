@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -7,16 +9,27 @@ function Register() {
     password: "",
     age: 0,
   });
+  const API_BASE_URL = `${process.env.REACT_APP_API_URL}`;
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Send a POST request to the registration endpoint with 'formData'
-    // Example: axios.post('/auth/register', formData)
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/auth/register`,
+        formData
+      );
+      console.log(response.data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

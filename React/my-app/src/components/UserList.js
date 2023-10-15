@@ -10,16 +10,18 @@ function UserList() {
 
   useEffect(() => {
     // Fetch the list of users from the API endpoint
+    const token = localStorage.getItem("authToken");
+    // Set the common headers for Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
       .get(`${API_BASE_URL}/users`)
       .then((response) => {
-        // console.log(response.data.users);
         setUsers(response.data.users);
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
       });
-  }, []);
+  }, [API_BASE_URL]);
 
   const handleEdit = (userId) => {
     setEditingUserId(userId);
