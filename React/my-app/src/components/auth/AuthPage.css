@@ -1,0 +1,15 @@
+/* src/AuthPage.css */
+
+.auth-container {
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Make the background cover the entire viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-form {
+  background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background to the form */
+  padding: 20px;
+}

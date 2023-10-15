@@ -4,10 +4,13 @@ const app = express();
 
 // Connect to MongoDB (replace <YourMongoDBURI> with your MongoDB URI)
 mongoose
-  .connect("<YourMongoDBURI>", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://rajeevmenonwky:R%40j59446@cluster0.zmi3fa5.mongodb.net/?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -53,8 +56,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-/**
- * Test the endpoint with below
- * curl -X POST -H "Content-Type: application/json" -d '{"input": "User's input here"}' http://localhost:3000/user-input
- */
