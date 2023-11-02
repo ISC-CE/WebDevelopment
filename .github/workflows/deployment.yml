@@ -1,0 +1,45 @@
+name: Deploy to Prod
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  action:
+    defaults:
+      run:
+        shell: bash
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          architecture: x64
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
+          aws-region: eu-central-1
+
+      - name: app install
+        run: npm ci
+
+      - name: Deploy to Elastic Beanstalk
+        run: |
+          npm run build
+          eb deploy yourEnvironment
