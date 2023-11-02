@@ -24,6 +24,12 @@ jobs:
           node-version: 16.x
           architecture: x64
 
+      - name: Change directory to Node
+        run: cd Node
+
+      - name: Install app dependencies 
+        run: npm install
+
       - name: Install AWS CLI
         run: |
           sudo apt-get update
@@ -35,9 +41,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
           aws-region: eu-central-1
-
-      - name: app install
-        run: npm ci
 
       - name: Deploy to Elastic Beanstalk
         run: |
