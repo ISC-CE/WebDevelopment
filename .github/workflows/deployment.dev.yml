@@ -37,9 +37,13 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STAGING }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STAGING }}
-          aws-region: eu-central-1
+          aws-region: us-east-1
+
+      - name: Initialize Elastic Beanstalk Environment
+        run: eb init -r us-east-1 -a WebDevelopement-Node-env
+
+      - name: Configure EB CLI
+        run: eb use WebDevelopement-Node-env
 
       - name: Deploy to Elastic Beanstalk
-        run: |
-          eb init
-          eb deploy yourEnvironment
+        run: eb deploy yourEnvironment
