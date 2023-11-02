@@ -1,0 +1,5 @@
+branch-defaults:
+  default:
+    environment: WebDevelopement-Node-env
+global:
+  application_name: WebDevelopement-Node
