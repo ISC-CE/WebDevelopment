@@ -35,5 +35,4 @@ jobs:
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          npm run build
           eb deploy yourEnvironment
