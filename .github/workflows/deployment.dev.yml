@@ -21,6 +21,12 @@ jobs:
       - name: Install app dependencies 
         run: npm install
 
+      - name: Install EB CLI and AWS CLI
+        run: |
+          pip install awsebcli
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
       - name: Install AWS CLI
         run: |
           sudo apt-get update
